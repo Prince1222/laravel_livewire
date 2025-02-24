@@ -7,4 +7,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/',ShowHome::class);
+Route::get('/',ShowHome::class)->name('home');
