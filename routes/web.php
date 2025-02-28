@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',ShowHome::class)->name('home');
 Route::get('/services',ShowServicePage::class)->name('servicesPage');
 Route::get('/service/{id}',ShowService::class)->name('servicePage');
-Route::get('/team',ShowTeamPage::class)->name('servicePage');
+Route::get('/team',ShowTeamPage::class)->name('teamPage');
