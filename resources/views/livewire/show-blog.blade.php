@@ -46,8 +46,13 @@
                              <div class="col-md-6" data-aos="fade">
 							<article class="blog-post">
 								<div class="post-slider slider-sm rounded">
-									<img loading="lazy" decoding="async" src="images/blog/post-4.jpg" alt="Post Thumbnail">
+									{{-- <img loading="lazy" decoding="async" src="images/blog/post-4.jpg" alt="Post Thumbnail"> --}}
 									
+
+                                    @if ($article->image != "")
+                                    <img loading="lazy" decoding="async" src="{{asset('storage/'.
+                                    $article->image)}}" alt="Post Thumbnail">  
+                                    @endif
 								</div>
 								<div class="pt-4">
 									<p class="mb-3">{{\Carbon\Carbon::parse($article->create_at)->format('d M, Y')}}</p>
@@ -60,25 +65,7 @@
 						</div>
 				
 						<div class="col-12">
-							<nav class="mt-4">
-								<!-- pagination -->
-								<nav class="mb-md-50">
-									<ul class="pagination justify-content-center">
-										<li class="page-item active "> <a href="blog.html" class="page-link">
-                        1
-                      </a>
-										</li>
-										<li class="page-item"> <a href="blog.html" class="page-link">
-                        2
-                      </a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="blog.html" aria-label="Pagination Arrow"> <i class="fas fa-angle-right"></i>
-											</a>
-										</li>
-									</ul>
-								</nav>
-							</nav>
+                          {{$article->links()}}
 						</div>
 					</div>
 				</div>
@@ -87,15 +74,14 @@
 				<!-- categories -->
 				<div class="widget widget-categories">
 					<h5 class="widget-title"><span>Category</span></h5>
-					<ul class="list-unstyled widget-list">			
-						<li><a href="#!">Technology <small class="ml-auto">(1)</small></a>
-						</li>			
-						<li><a href="#!">Fashion <small class="ml-auto">(1)</small></a>
-						</li>
-						<li><a href="#!">Photography <small class="ml-auto">(2)</small></a>
-						</li>
-						<li><a href="#!">Videography <small class="ml-auto">(1)</small></a>
-						</li>
+					<ul class="list-unstyled widget-list">
+                        @if ($categories->isNotEmpty())
+                        @foreach ($categories as $category)
+                        <li><a wire:navigate href="{{route('blog').'?categorySlug='.$category->slug}}">{{$category->name}}</a>
+						</li>	
+                        @endforeach
+                        
+                        @endif	
 					</ul>
 				</div>
 				<!-- tags -->
