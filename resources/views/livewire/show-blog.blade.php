@@ -116,7 +116,7 @@
 										{{-- <img class="rounded" loading="lazy" decoding="async" src="images/blog/post-4.jpg" alt="Post Thumbnail"> --}}
 										@if ($article->image != "")
 										<img loading="lazy" decoding="async" src="{{asset('storage/'.
-										$article->image)}}" alt="Post Thumbnail">  
+										$latestArticle->image)}}" alt="Post Thumbnail">  
 										@endif
 									</div>
 								</a>

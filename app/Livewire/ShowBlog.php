@@ -17,6 +17,7 @@ class ShowBlog extends Component
     public function render()
     {
         $categories = Category::all();
+        
         if(!empty($this->categorySlug)){
           $category = Category::where('slug',$this->categorySlug)->first();
 
@@ -26,13 +27,15 @@ class ShowBlog extends Component
          
           $articles = Articles::orderBy('created_at','DESC')
                       ->where('category_id',$category->id)
-                      ->paginate(2);
+                      ->where('status',1)
+                      ->paginate(10);
 
         }else{
-            $articles = Articles::orderBy('created_at','DESC')->paginate(2);
+            $articles = Articles::orderBy('created_at','DESC')->paginate(10);
         }
 
         $latestArticles = Articles::orderBy('created_at','DESC')
+                        ->where('status',1)
                          ->get()
                         ->take(3);
 
