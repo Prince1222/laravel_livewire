@@ -7,6 +7,7 @@ use App\Models\Category;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
+use App\Livewire\abort;
 
 class ShowBlog extends Component
 {
@@ -25,16 +26,23 @@ class ShowBlog extends Component
          
           $articles = Articles::orderBy('created_at','DESC')
                       ->where('category_id',$category->id)
-                      ->paginate(10);
+                      ->paginate(2);
 
         }else{
             $articles = Articles::orderBy('created_at','DESC')->paginate(2);
         }
+
+        $latestArticles = Articles::orderBy('created_at','DESC')
+                         ->get()
+                        ->take(3);
+
+                        
     
        
         return view('livewire.show-blog',[
             'articles'=>$articles,
-            'categories'=> $categories
+            'categories'=> $categories,
+            'latestArticles'=> $latestArticles,
         ]);
     }
 }
